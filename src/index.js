@@ -1,3 +1,4 @@
+import matrix from './matrix.js'//'./node_modules/matrix/index.js'
 import silo from './node_modules/silo/index.js'
 import truth from './node_modules/truth/truth.mjs'
 import v from './node_modules/v/v.mjs'
