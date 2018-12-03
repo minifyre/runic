@@ -1,0 +1,31 @@
+*
+{
+	box-sizing:border-box;
+}
+html,
+body
+{
+	background:#000;
+	--bgGrid:#222;
+	margin:0;
+	padding:0;
+}
+.grid
+{
+	background:var(--bgGrid);
+	display:block;
+	height:100vmin;
+	margin:0 auto;
+	position:relative;
+	width:100vmin;
+}
+.tile
+{
+	align-items:center;
+	background-color:#eee;
+	border:0.5rem solid var(--bgGrid);
+	border-radius:25%;
+	display:flex;
+	justify-content:center;
+	position:absolute;
+}
