@@ -1,30 +1,20 @@
 output.render=function(state)
 {
 	const
-	{grid,height:h,width:w}=state.file.data,
-	i2pt=i=>matrix.i2pt(w,h,grid,i),
-	tileset=util.tilesets[state.view.tileset],
-	tiles=state.file.data.grid
-	.reduce(function(arr,val,i)
-	{
-		if(!val) return arr
-
-		const
-		tile=tileset(val)
-		return arr.concat([output.tile(state,tile,i2pt(i))])
-	},[])
+	cache=util.mkRendererCache(state),
+	tiles=cache.grid.map(curry(output.tile,cache)).filter(x=>!!x)
 
 	return [v('main.grid',{},...tiles)]
 }
-output.tile=function({file},txt,{x,y})
+output.tile=function({h,w, max, i2pt,tileset},val,i)
 {
+	if(!val) return
+
 	const
-	{height:h,width:w}=file.data,
+	{x,y}=i2pt(i),
 	[left,top]=[x/w,y/h].map(x=>util.dec2percent(x,0)+'%'),
 	[height,width]=[w,h].map(x=>(100/x)+'%'),
-	style=output.style({height,left,top,width})
 
-	return v('.tile',{style},txt)
 }
 //@todo upstream to v
 output.style=props=>Object.entries(props).map(([key,val])=>key+':'+val+';').join(' ')
