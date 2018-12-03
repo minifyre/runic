@@ -1,0 +1,1 @@
+logic.rand=(num,seed=Math.random())=>Math.floor(seed*num)
