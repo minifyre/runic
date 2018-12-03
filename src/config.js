@@ -12,6 +12,6 @@ config.state=
 	},
 	view:
 	{
-
+		tilset:'2s'
 	}
 }
