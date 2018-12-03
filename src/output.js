@@ -1,6 +1,18 @@
 output.render=function(state)
 {
+	const
+	{grid,height:h,width:w}=state.file.data,
+	i2pt=i=>matrix.i2pt(w,h,grid,i),
+	tileset=util.tilesets[state.view.tileset],
+	tiles=state.file.data.grid
+	.reduce(function(arr,val,i)
+	{
+		if(!val) return arr
 
+		const
+		tile=tileset(val)
+		return arr.concat([output.tile(state,tile,i2pt(i))])
+	},[])
 
 	return [v('main.grid',{},...tiles)]
 }
