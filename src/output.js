@@ -14,7 +14,12 @@ output.tile=function({h,w, max, i2pt,tileset},val,i)
 	{x,y}=i2pt(i),
 	[left,top]=[x/w,y/h].map(x=>util.dec2percent(x,0)+'%'),
 	[height,width]=[w,h].map(x=>(100/x)+'%'),
+	style=output.style({height,left,top,width}),
+	attrs={style}
 
+	if(val===max) attrs.class='max'
+
+	return v('.tile',attrs,tileset(val))
 }
 //@todo upstream to v
 output.style=props=>Object.entries(props).map(([key,val])=>key+':'+val+';').join(' ')
