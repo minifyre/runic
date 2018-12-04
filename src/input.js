@@ -8,6 +8,7 @@ input.slide=function(state,evt)
 	target=evt.path.find(el=>el.matches('.grid')),
 	{pointerId:pointer}=evt,
 	pt0=util.evt2pt(evt),
+	{height:rows,width:cols}=state.file.data,
 	move=function(evt)
 	{
 		if(evt.pointerId!==pointer) return
@@ -18,31 +19,12 @@ input.slide=function(state,evt)
 		{height,width}=target.getClientRects()[0],
 		h=(pt.x-pt0.x)/width,
 		v=(pt.y-pt0.y)/height,
-		hMax=1/state.file.data.width,
-		vMax=1/state.file.data.height
+		//cannot be set earlier as user could back out
+			// of previous move & get back to the origin
+		unset=!adj.x&&!adj.y,
+		[type,val,max]=((unset||adj.x)&&(h*h>v*v))?['x',h,1/cols]:['y',v,1/rows]
 
-		//@todo dry!
-		//@todo could this break if the window resizes during user input?
-
-		if(!adj.x&&!adj.y)
-		{
-			if(Math.abs(h)>Math.abs(v))
-			{
-				adj.x=h>0?Math.min(h,hMax):Math.max(h,-hMax)
-			}
-			else
-			{
-				adj.y=v>0?Math.min(v,vMax):Math.max(v,-vMax)
-			}
-		}
-		else if(adj.x&&(Math.abs(h)>Math.abs(v)))
-		{
-			adj.x=h>0?Math.min(h,hMax):Math.max(h,-hMax)
-		}
-		else if(adj.y)
-		{
-			adj.y=v>0?Math.min(v,vMax):Math.max(v,-vMax)
-		}
+		adj[type]=util.numWithinRange(val,-max,max)
 	},
 	stop=function(evt)
 	{
