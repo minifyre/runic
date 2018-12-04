@@ -11,6 +11,8 @@ input.slide=function(state,evt)
 	{height:rows,width:cols}=state.file.data,
 	hMax=1/cols,
 	vMax=1/rows,
+	{height:h0,top:t0,left:l0,width:w0}=target.getClientRects()[0],
+	coords0={x:Math.floor((pt0.x-l0)/w0/hMax),y:Math.floor((pt0.y-t0)/h0/vMax)},
 	move=function(evt)
 	{
 		if(evt.pointerId!==pointer) return
