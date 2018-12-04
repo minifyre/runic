@@ -1,4 +1,10 @@
-util.dec2percent=(float,precision=4)=>(float*100).toFixed(precision)
+util.dec2percent=function(float,precision=4)
+{
+	return (float*100)
+	.toFixed(precision)
+	.replace(/0+$/,'')
+	.replace(/\.$/,'')
+}
 util.mkRendererCache=function(state)
 {
 	const
