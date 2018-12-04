@@ -10,6 +10,12 @@ util.mkRendererCache=function(state)
 
 	return {adj,grid,h,w ,max, i2pt,tileset}//shortcuts, derrived, fns
 }
+util.numWithinRange=function(val,min,max)
+{
+	return	val>max?max:
+			val<min?min:
+			val
+}
 util.tilesets=
 {
 	'2s':exp=>Math.pow(2,exp)
