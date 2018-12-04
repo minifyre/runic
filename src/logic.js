@@ -14,3 +14,5 @@ logic.normalize=function(opts)
 }
 
 logic.rand=(num,seed=Math.random())=>Math.floor(seed*num)
+
+logic.toggleInput=state=>state.view.sliding=!state.view.sliding
