@@ -15,9 +15,6 @@ output.tile=function({adj,grid,h,w, max, i2pt,tileset},val,i)
 
 	const
 	{x,y}=i2pt(i),
-	[left,top]=[x/w+adj.x,y/h+adj.y].map(n=>util.dec2percent(n,4)+'%'),
-	[height,width]=[w,h].map(x=>(100/x)+'%'),
-	style=output.style({height,left,top,width}),
 	[north,west,east,south]=matrix.adjacentPts(w,h,grid,{x,y},false)
 	.map(function(pt)
 	{
@@ -29,6 +26,18 @@ output.tile=function({adj,grid,h,w, max, i2pt,tileset},val,i)
 			tile===val?'match':
 			'edge'
 	}),
+	horizontal=!adj.x?adj.x:
+		adj.x>0&&east!=='edge'?adj.x:
+		adj.x<0&&west!=='edge'?adj.x:
+		0,
+	vertical=!adj.y?adj.y:
+		adj.y>0&&south!=='edge'?adj.y:
+		adj.y<0&&north!=='edge'?adj.y:
+		0,
+	[left,top]=[x/w+horizontal,y/h+vertical]
+		.map(n=>util.dec2percent(n,4)+'%'),
+	[height,width]=[w,h].map(x=>(100/x)+'%'),
+	style=output.style({height,left,top,width}),
 	data={north,west,south,east},
 	attrs={data,style}
 
