@@ -38,7 +38,7 @@ output.tile=function({adj,grid,h,w, max, i2pt,tileset},val,i)
 		.map(n=>util.dec2percent(n,4)+'%'),
 	[height,width]=[w,h].map(x=>(100/x)+'%'),
 	style=output.style({height,left,top,width}),
-	data={north,west,south,east},
+	data={north,west,south,east,val},
 	attrs={data,style}
 
 	if(val===max) attrs.class='max'
