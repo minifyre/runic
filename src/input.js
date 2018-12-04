@@ -23,8 +23,8 @@ input.slide=function(state,evt)
 			// of previous move & get back to the origin
 		unset=!adj.x&&!adj.y,
 		[type,val,max]=((unset||adj.x)&&(h*h>v*v))?['x',h,1/cols]:['y',v,1/rows]
-
-		adj[type]=util.numWithinRange(val,-max,max)
+		//@todo don't allow user to change direction after exceeding max
+		adj[type]=util.getNumInRange(-max,max,val)
 	},
 	stop=function(evt)
 	{

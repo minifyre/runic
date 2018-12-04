@@ -10,7 +10,7 @@ util.mkRendererCache=function(state)
 
 	return {adj,grid,h,w ,max, i2pt,tileset}//shortcuts, derrived, fns
 }
-util.numWithinRange=function(val,min,max)
+util.getNumInRange=function(min,max,val)
 {
 	return	val>max?max:
 			val<min?min:
