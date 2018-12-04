@@ -15,10 +15,9 @@ output.tile=function({adj,h,w, max, i2pt,tileset},val,i)
 
 	const
 	{x,y}=i2pt(i),
-	[left,top]=[x/w,y/h]
-		.map(x=>util.dec2percent(x,0)+'%'),
+	[left,top]=[x/w+adj.x,y/h+adj.y].map(n=>util.dec2percent(n,4)+'%'),
 	[height,width]=[w,h].map(x=>(100/x)+'%'),
-	style=output.style({height,left:`calc(${left} + ${adj.x}px)`,top:`calc(${top} + ${adj.y}px)`,width}),
+	style=output.style({height,left,top,width}),
 	attrs={style}
 
 	if(val===max) attrs.class='max'
