@@ -16,16 +16,19 @@ input.slide=function(state,evt)
 		{adj}=state.view,
 		pt=util.evt2pt(evt),
 		h=pt.x-pt0.x,
-		v=pt.y-pt0.y
+		v=pt.y-pt0.y,
+		{height,width}=target.getClientRects()[0]
 
 		//@todo dry!
+		//@todo this could break if the window resizes during user input
+
 		if(!adj.x&&!adj.y)
 		{
-			if(Math.abs(h)>Math.abs(v)) adj.x=h
-			else adj.y=v
+			if(Math.abs(h)>Math.abs(v)) adj.x=h/width
+			else adj.y=v/height
 		}
-		else if(adj.x&&(Math.abs(h)>Math.abs(v))) adj.x=h
-		else if(adj.y) adj.y=v
+		else if(adj.x&&(Math.abs(h)>Math.abs(v))) adj.x=h/width
+		else if(adj.y) adj.y=v/height
 	},
 	stop=function(evt)
 	{
