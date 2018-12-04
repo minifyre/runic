@@ -15,20 +15,34 @@ input.slide=function(state,evt)
 		const
 		{adj}=state.view,
 		pt=util.evt2pt(evt),
-		h=pt.x-pt0.x,
-		v=pt.y-pt0.y,
-		{height,width}=target.getClientRects()[0]
+		{height,width}=target.getClientRects()[0],
+		h=(pt.x-pt0.x)/width,
+		v=(pt.y-pt0.y)/height,
+		hMax=1/state.file.data.width,
+		vMax=1/state.file.data.height
 
 		//@todo dry!
-		//@todo this could break if the window resizes during user input
+		//@todo could this break if the window resizes during user input?
 
 		if(!adj.x&&!adj.y)
 		{
-			if(Math.abs(h)>Math.abs(v)) adj.x=h/width
-			else adj.y=v/height
+			if(Math.abs(h)>Math.abs(v))
+			{
+				adj.x=h>0?Math.min(h,hMax):Math.max(h,-hMax)
+			}
+			else
+			{
+				adj.y=v>0?Math.min(v,vMax):Math.max(v,-vMax)
+			}
 		}
-		else if(adj.x&&(Math.abs(h)>Math.abs(v))) adj.x=h/width
-		else if(adj.y) adj.y=v/height
+		else if(adj.x&&(Math.abs(h)>Math.abs(v)))
+		{
+			adj.x=h>0?Math.min(h,hMax):Math.max(h,-hMax)
+		}
+		else if(adj.y)
+		{
+			adj.y=v>0?Math.min(v,vMax):Math.max(v,-vMax)
+		}
 	},
 	stop=function(evt)
 	{
