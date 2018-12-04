@@ -9,7 +9,7 @@ output.render=function(state)
 
 	return [v('main.grid',{data,on:{pointerdown}},...tiles)]
 }
-output.tile=function({adj,h,w, max, i2pt,tileset},val,i)
+output.tile=function({adj,grid,h,w, max, i2pt,tileset},val,i)
 {
 	if(!val) return
 
@@ -18,7 +18,19 @@ output.tile=function({adj,h,w, max, i2pt,tileset},val,i)
 	[left,top]=[x/w+adj.x,y/h+adj.y].map(n=>util.dec2percent(n,4)+'%'),
 	[height,width]=[w,h].map(x=>(100/x)+'%'),
 	style=output.style({height,left,top,width}),
-	attrs={style}
+	[north,west,east,south]=matrix.adjacentPts(w,h,grid,{x,y},false)
+	.map(function(pt)
+	{
+		if(pt.x<0||pt.x===w||pt.y<0||pt.y===h) return 'edge'
+
+		const tile=matrix.at(w,h,grid,pt)
+
+		return tile===0?'empty':
+			tile===val?'match':
+			'edge'
+	}),
+	data={north,west,south,east},
+	attrs={data,style}
 
 	if(val===max) attrs.class='max'
 
