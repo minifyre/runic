@@ -26,6 +26,6 @@ util.inRange=(min,max,val)=>val<=max&&val>=min
 
 util.tilesets=
 {
-	'2s':exp=>Math.pow(2,exp)
+	'2s':exp=>Math.pow(2,exp-1)
 }
 util.evt2pt=({pageX:x,pageY:y})=>({x,y})
