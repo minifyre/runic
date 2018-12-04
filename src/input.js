@@ -48,9 +48,10 @@ input.slide=function(state,evt)
 					.map(txt=>txt.replace('%',''))
 					.map(txt=>parseInt(txt)),
 				[x,y]=[left/(hMax*100),top/(vMax*100)],
-				i=matrix.pt2i(cols,rows,arr,{x,y})
+				i=matrix.pt2i(cols,rows,arr,{x,y}),
+				val=parseInt(el.getAttribute('data-val'))
 
-				arr[i]+=parseInt(el.getAttribute('data-val'))
+				arr[i]=arr[i]?val+1:val
 
 				return arr
 			},Array(state.file.data.width*state.file.data.height).fill(0))
