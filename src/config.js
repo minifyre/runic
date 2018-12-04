@@ -12,6 +12,8 @@ config.state=
 	},
 	view:
 	{
+		adj:{x:0,y:0},
+		sliding:false,
 		tileset:'2s'
 	}
 }
