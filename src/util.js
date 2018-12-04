@@ -16,6 +16,8 @@ util.numWithinRange=function(val,min,max)
 			val<min?min:
 			val
 }
+util.inRange=(min,max,val)=>val<=max&&val>=min
+
 util.tilesets=
 {
 	'2s':exp=>Math.pow(2,exp)
