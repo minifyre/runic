@@ -7,6 +7,7 @@ body
 {
 	background:#000;
 	--bgGrid:#222;
+	--match:#0c0;
 	margin:0;
 	padding:0;
 }
@@ -47,3 +48,8 @@ body
 {
 	color:red;
 }
+
+[data-north="match"]{border-top-color:var(--match);}
+[data-east="match"]{border-right-color:var(--match);}
+[data-west="match"]{border-left-color:var(--match);}
+[data-south="match"]{border-bottom-color:var(--match);}
